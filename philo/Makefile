@@ -6,7 +6,7 @@
 #    By: malaakso <malaakso@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/28 16:20:50 by malaakso          #+#    #+#              #
-#    Updated: 2023/07/19 09:56:12 by malaakso         ###   ########.fr        #
+#    Updated: 2023/07/19 16:50:31 by malaakso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,10 @@ OBJ_FOLDER		=	obj
 FOLDER_LIST		=	$(OBJ_FOLDER)
 
 H_FILES			=	philo.h
-C_FILES			=	philo.c
+C_FILES			=	philo.c \
+					preflight_checks.c \
+					my_atoi.c \
+					time.c
 
 H_PATHS			=	$(H_FILES)
 C_PATHS			=	$(C_FILES)

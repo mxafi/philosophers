@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malaakso <malaakso@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/17 22:04:32 by malaakso          #+#    #+#             */
-/*   Updated: 2023/07/19 17:06:16 by malaakso         ###   ########.fr       */
+/*   Created: 2023/07/19 16:49:29 by malaakso          #+#    #+#             */
+/*   Updated: 2023/07/19 17:06:14 by malaakso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(int ac, char **av)
+size_t	get_timestamp(struct timeval start)
 {
-	// DEBUG: Makefile has debug flags and extra CFLAGS to remove before submission
-	if (preflight_checks(ac, av) != SUCCESS)
-		return (0);
-	(void)av;
-	return (0);
+	struct timeval	now;
+
+	gettimeofday(&now, NULL);
+	return (((now.tv_sec - start.tv_sec) * 1000000)
+		+ (now.tv_usec - start.tv_usec));
+}
+
+size_t	us_to_ms(size_t microseconds)
+{
+	return (microseconds / 1000);
 }
