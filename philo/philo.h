@@ -6,7 +6,7 @@
 /*   By: malaakso <malaakso@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 22:05:51 by malaakso          #+#    #+#             */
-/*   Updated: 2023/07/19 08:01:23 by malaakso         ###   ########.fr       */
+/*   Updated: 2023/07/19 11:37:46 by malaakso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,12 @@
 
 // for pthread functions
 # include <pthread.h>
+
+// typedefs
+typedef struct s_fork
+{
+	pthread_mutex_t	fork_mutex;
+	
+}	t_fork;
 
 #endif
