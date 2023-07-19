@@ -6,7 +6,7 @@
 #    By: malaakso <malaakso@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/28 16:20:50 by malaakso          #+#    #+#              #
-#    Updated: 2023/05/17 22:19:16 by malaakso         ###   ########.fr        #
+#    Updated: 2023/07/19 07:54:21 by malaakso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,8 @@ C_PATHS			=	$(C_FILES)
 OBJ_PATHS		=	$(addprefix $(OBJ_FOLDER)/, \
 					$(patsubst %.c, %.o, $(C_FILES)))
 
-C_FLAGS_OBJ		=	-Wall -Wextra -Werror
-C_FLAGS_NAME		=	$(C_FLAGS_OBJ)
+C_FLAGS_OBJ		=	-Wall -Wextra -Werror -Wpedantic -Wunreachable-code -Wtype-limits -g -fsanitize=address
+C_FLAGS_NAME	=	$(C_FLAGS_OBJ) -pthread
 
 .PHONY: all
 all: $(NAME)
