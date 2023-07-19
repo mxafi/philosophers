@@ -6,7 +6,7 @@
 /*   By: malaakso <malaakso@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 22:05:51 by malaakso          #+#    #+#             */
-/*   Updated: 2023/07/19 17:06:15 by malaakso         ###   ########.fr       */
+/*   Updated: 2023/07/19 18:19:51 by malaakso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,19 @@
 // for system limits
 # include <limits.h>
 
+# define MAX_PHILOSOPHER_COUNT 200
+
 typedef struct s_common_data
 {
 	pthread_t		monitor_id;
 	pthread_mutex_t	*forks;
 	t_philosopher	**philosophers;
-	const int		number_of_philosophers;
-	const int		time_to_die;
-	const int		time_to_eat;
-	const int		time_to_sleep;
-	const int		number_of_times_each_philosopher_must_eat;
+	int				number_of_philosophers;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				number_of_times_each_philosopher_must_eat;
 	pthread_mutex_t	stdout_lock;
-	
 }	t_common_data;
 
 typedef struct s_philosopher
@@ -70,5 +71,7 @@ typedef enum e_err
 
 int		my_atoi(const char *str);
 t_err	preflight_checks(int ac, char **av);
+size_t	get_timestamp(struct timeval start);
+size_t	us_to_ms(size_t microseconds);
 
 #endif
