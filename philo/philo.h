@@ -6,7 +6,7 @@
 /*   By: malaakso <malaakso@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 22:05:51 by malaakso          #+#    #+#             */
-/*   Updated: 2023/07/19 18:19:51 by malaakso         ###   ########.fr       */
+/*   Updated: 2023/07/20 13:59:11 by malaakso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,15 @@ typedef struct s_philosopher
 	pthread_mutex_t	eat_finished_lock;
 	size_t			eat_timestamp;
 	pthread_mutex_t	eat_timestamp_lock;
-
+	t_common_data	*common_data;
 }					t_philosopher;
 
 typedef enum e_err
 {
 	SUCCESS,
-	FAIL
+	FAIL,
+	MALLOC_FAIL,
+	MUTEX_FAIL
 }	t_err;
 
 int		my_atoi(const char *str);
