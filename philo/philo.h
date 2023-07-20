@@ -6,7 +6,7 @@
 /*   By: malaakso <malaakso@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 22:05:51 by malaakso          #+#    #+#             */
-/*   Updated: 2023/07/20 13:59:11 by malaakso         ###   ########.fr       */
+/*   Updated: 2023/07/20 17:48:25 by malaakso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,10 @@ int		my_atoi(const char *str);
 t_err	preflight_checks(int ac, char **av);
 size_t	get_timestamp(struct timeval start);
 size_t	us_to_ms(size_t microseconds);
+void	free_memory(t_common_data *d);
+t_err	init_mutexes(t_common_data *data);
+t_err	set_fork_ids(t_common_data *data, int philo_id);
+t_err	init_philosophers(t_common_data *data);
+t_err	init_memory(t_common_data **data, int ac, char **av);
 
 #endif
