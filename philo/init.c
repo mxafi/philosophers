@@ -6,7 +6,7 @@
 /*   By: malaakso <malaakso@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 16:38:46 by malaakso          #+#    #+#             */
-/*   Updated: 2023/07/20 17:52:57 by malaakso         ###   ########.fr       */
+/*   Updated: 2023/07/24 10:24:42 by malaakso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ t_err	init_mutexes(t_common_data *data)
 	int	i;
 
 	if (pthread_mutex_init(&data->stdout_lock, NULL))
+		return (MUTEX_FAIL);
+	if (pthread_mutex_init(&data->is_finished_lock, NULL))
 		return (MUTEX_FAIL);
 	data->forks = malloc(sizeof(pthread_mutex_t)
 			* data->number_of_philosophers);
@@ -110,23 +112,23 @@ t_err	init_philosophers(t_common_data *data)
 	if (!data->philosophers)
 		return (MALLOC_FAIL);
 	i = 0;
-	while (i < data->number_of_philosophers)
+	while (i++ < data->number_of_philosophers)
 	{
-		data->philosophers[i] = malloc(sizeof(t_philosopher));
-		if (!data->philosophers[i])
+		data->philosophers[i - 1] = malloc(sizeof(t_philosopher));
+		if (!data->philosophers[i - 1])
 			return (MALLOC_FAIL);
-		memset(data->philosophers[i], 0, sizeof(t_philosopher));
-		data->philosophers[i]->philo_id = i + 1;
-		data->philosophers[i]->common_data = data;
-		if (set_fork_ids(data, data->philosophers[i]->philo_id) != SUCCESS)
+		memset(data->philosophers[i - 1], 0, sizeof(t_philosopher));
+		data->philosophers[i - 1]->philo_id = i;
+		data->philosophers[i - 1]->common_data = data;
+		data->philosophers[i - 1]->eat_finished = 0;
+		if (set_fork_ids(data, data->philosophers[i - 1]->philo_id) != SUCCESS)
 			return (FAIL);
-		if (pthread_mutex_init(&data->philosophers[i]->eat_count_lock, NULL)
-			|| pthread_mutex_init(&data->philosophers[i]->eat_finished_lock,
+		if (pthread_mutex_init(&data->philosophers[i - 1]->eat_count_lock, NULL)
+			|| pthread_mutex_init(&data->philosophers[i - 1]->eat_finished_lock,
 				NULL)
-			|| pthread_mutex_init(&data->philosophers[i]->eat_timestamp_lock,
-				NULL))
+			|| pthread_mutex_init(
+				&data->philosophers[i - 1]->eat_timestamp_lock, NULL))
 			return (MUTEX_FAIL);
-		i++;
 	}
 }
 
@@ -153,6 +155,7 @@ t_err	init_memory(t_common_data **data, int ac, char **av)
 		(*data)->number_of_times_each_philosopher_must_eat = my_atoi(av[5]);
 	else
 		(*data)->number_of_times_each_philosopher_must_eat = -1;
+	(*data)->is_finished = FALSE;
 	if (init_philosophers(*data) != SUCCESS || init_mutexes(*data) != SUCCESS)
 	{
 		free_memory(*data);
