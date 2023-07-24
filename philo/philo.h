@@ -6,7 +6,7 @@
 /*   By: malaakso <malaakso@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 22:05:51 by malaakso          #+#    #+#             */
-/*   Updated: 2023/07/24 13:01:11 by malaakso         ###   ########.fr       */
+/*   Updated: 2023/07/24 13:10:00 by malaakso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ typedef enum e_err
 	MALLOC_FAIL,
 	MUTEX_FAIL,
 	PRINT_FAIL,
-	EAT_FAIL
+	EAT_FAIL,
+	JOIN_FAIL
 }	t_err;
 
 typedef enum e_bool
