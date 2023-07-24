@@ -6,7 +6,7 @@
 #    By: malaakso <malaakso@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/28 16:20:50 by malaakso          #+#    #+#              #
-#    Updated: 2023/07/24 12:37:10 by malaakso         ###   ########.fr        #
+#    Updated: 2023/07/24 13:23:55 by malaakso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ C_FILES			=	philo.c \
 					time.c \
 					init.c \
 					philo_routine.c \
-					philo_routine_helpers.c
+					philo_routine_helpers.c \
+					monitor_routine.c
 
 H_PATHS			=	$(H_FILES)
 C_PATHS			=	$(C_FILES)
