@@ -6,7 +6,7 @@
 #    By: malaakso <malaakso@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/28 16:20:50 by malaakso          #+#    #+#              #
-#    Updated: 2023/07/20 16:39:25 by malaakso         ###   ########.fr        #
+#    Updated: 2023/07/24 09:53:09 by malaakso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ C_FILES			=	philo.c \
 					preflight_checks.c \
 					my_atoi.c \
 					time.c \
-					init.c
+					init.c \
+					philo_routine.c
 
 H_PATHS			=	$(H_FILES)
 C_PATHS			=	$(C_FILES)
