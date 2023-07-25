@@ -6,7 +6,7 @@
 /*   By: malaakso <malaakso@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 22:04:32 by malaakso          #+#    #+#             */
-/*   Updated: 2023/07/24 13:14:32 by malaakso         ###   ########.fr       */
+/*   Updated: 2023/07/25 12:02:58 by malaakso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,30 @@ t_err	join_threads(t_common_data *d)
 	return (ret);
 }
 
+t_err	create_threads(t_common_data *d)
+{
+	int	i;
+
+	gettimeofday(&d->start, NULL);
+	i = 0;
+	while (i < d->number_of_philosophers)
+	{
+		if (pthread_create(&d->philosophers[i]->thread_id,
+				NULL, &philo_routine, d->philosophers[i]))
+		{
+			printf("Error: create_threads: philo\n");
+			return (CREATE_THREAD_FAIL);
+		}
+		i++;
+	}
+	if (pthread_create(&d->monitor_id, NULL, &monitor_routine, d))
+	{
+		printf("Error: create_threads: monitor\n");
+		return (CREATE_THREAD_FAIL);
+	}
+	return (SUCCESS);
+}
+
 int	main(int ac, char **av)
 {
 	t_common_data	*data;
@@ -38,7 +62,8 @@ int	main(int ac, char **av)
 		return (1);
 	if (init_memory(&data, ac, av) != SUCCESS)
 		return (1);
-	// actual simulation stuffs.
+	if (create_threads(data) != SUCCESS)
+		printf("Error: create_threads\n");
 	if (join_threads(data) != SUCCESS)
 		printf("Error: join_threads\n");
 	free_memory(data);
