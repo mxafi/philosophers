@@ -6,7 +6,7 @@
 /*   By: malaakso <malaakso@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 12:35:57 by malaakso          #+#    #+#             */
-/*   Updated: 2023/07/24 12:36:56 by malaakso         ###   ########.fr       */
+/*   Updated: 2023/07/25 11:50:43 by malaakso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_bool	is_philo_finished(t_common_data *d)
 t_err	philo_stdout(t_philosopher *p, char *msg)
 {
 	pthread_mutex_lock(&p->common_data->stdout_lock);
-	if (is_philo_finished == TRUE)
+	if (is_philo_finished(p->common_data) == TRUE)
 	{
 		pthread_mutex_unlock(&p->common_data->stdout_lock);
 		return (PRINT_FAIL);
