@@ -15,7 +15,8 @@
 t_err	philo_eat_take_forks(t_philosopher *p)
 {
 	pthread_mutex_lock(&p->common_data->forks[p->fork_id[0]]);
-	if (philo_stdout(p, "has taken a fork") != SUCCESS)
+	if (philo_stdout(p, "has taken a fork") != SUCCESS
+		|| p->fork_id[0] == p->fork_id[1])
 	{
 		pthread_mutex_unlock(&p->common_data->forks[p->fork_id[0]]);
 		return (EAT_FAIL);
