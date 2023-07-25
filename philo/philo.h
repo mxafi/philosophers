@@ -6,7 +6,7 @@
 /*   By: malaakso <malaakso@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 22:05:51 by malaakso          #+#    #+#             */
-/*   Updated: 2023/07/25 11:56:59 by malaakso         ###   ########.fr       */
+/*   Updated: 2023/07/25 12:05:50 by malaakso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@
 # include <limits.h>
 
 # define MAX_PHILOSOPHER_COUNT 200
+
+typedef struct s_philosopher	t_philosopher;
 
 typedef struct s_common_data
 {
