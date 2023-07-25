@@ -6,7 +6,7 @@
 /*   By: malaakso <malaakso@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 22:05:51 by malaakso          #+#    #+#             */
-/*   Updated: 2023/07/25 12:08:12 by malaakso         ###   ########.fr       */
+/*   Updated: 2023/07/25 12:12:09 by malaakso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,9 @@ t_err	init_philosophers(t_common_data *data);
 t_err	init_memory(t_common_data **data, int ac, char **av);
 t_bool	is_philo_finished(t_common_data *d);
 t_err	philo_stdout(t_philosopher *p, char *msg);
-void	*philo_routine(t_philosopher *p);
+void	*philo_routine(void *v_p);
 void	philo_usleep(t_common_data *d, size_t sleep_duration_microseconds);
 t_err	philo_sleep(t_philosopher *p);
-void	*monitor_routine(t_common_data *d);
+void	*monitor_routine(void *v_d);
 
 #endif

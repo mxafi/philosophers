@@ -6,7 +6,7 @@
 /*   By: malaakso <malaakso@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 09:53:14 by malaakso          #+#    #+#             */
-/*   Updated: 2023/07/24 13:00:57 by malaakso         ###   ########.fr       */
+/*   Updated: 2023/07/25 12:10:34 by malaakso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,11 @@ t_err	philo_eat(t_philosopher *p)
 	return (ret);
 }
 
-void	*philo_routine(t_philosopher *p)
+void	*philo_routine(void *v_p)
 {
+	t_philosopher	*p;
+
+	p = (t_philosopher *)v_p;
 	if (p->philo_id % 2 == 0)
 	{
 		if (philo_sleep(p) != SUCCESS)

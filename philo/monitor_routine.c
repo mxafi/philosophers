@@ -6,7 +6,7 @@
 /*   By: malaakso <malaakso@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 13:15:32 by malaakso          #+#    #+#             */
-/*   Updated: 2023/07/25 11:48:38 by malaakso         ###   ########.fr       */
+/*   Updated: 2023/07/25 12:11:40 by malaakso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,13 @@ t_bool	is_philosopher_dead(t_philosopher *p)
 	return (ret);
 }
 
-void	*monitor_routine(t_common_data *d)
+void	*monitor_routine(void *v_d)
 {
-	int	i;
-	int	n_of_fed_philosophers;
+	int				i;
+	int				n_of_fed_philosophers;
+	t_common_data	*d;
 
+	d = (t_common_data *)v_d;
 	while (1)
 	{
 		usleep(500);
