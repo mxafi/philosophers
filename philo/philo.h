@@ -6,7 +6,7 @@
 /*   By: malaakso <malaakso@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 22:05:51 by malaakso          #+#    #+#             */
-/*   Updated: 2023/07/25 12:05:50 by malaakso         ###   ########.fr       */
+/*   Updated: 2023/07/25 12:07:14 by malaakso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,24 @@
 # include <limits.h>
 
 # define MAX_PHILOSOPHER_COUNT 200
+
+typedef enum e_err
+{
+	SUCCESS,
+	FAIL,
+	MALLOC_FAIL,
+	MUTEX_FAIL,
+	PRINT_FAIL,
+	EAT_FAIL,
+	JOIN_FAIL,
+	CREATE_THREAD_FAIL
+}	t_err;
+
+typedef enum e_bool
+{
+	FALSE,
+	TRUE
+}	t_bool;
 
 typedef struct s_philosopher	t_philosopher;
 
@@ -67,24 +85,6 @@ typedef struct s_philosopher
 	pthread_mutex_t	eat_timestamp_lock;
 	t_common_data	*common_data;
 }					t_philosopher;
-
-typedef enum e_err
-{
-	SUCCESS,
-	FAIL,
-	MALLOC_FAIL,
-	MUTEX_FAIL,
-	PRINT_FAIL,
-	EAT_FAIL,
-	JOIN_FAIL,
-	CREATE_THREAD_FAIL
-}	t_err;
-
-typedef enum e_bool
-{
-	FALSE,
-	TRUE
-}	t_bool;
 
 int		my_atoi(const char *str);
 t_err	preflight_checks(int ac, char **av);
