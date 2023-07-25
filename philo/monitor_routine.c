@@ -6,7 +6,7 @@
 /*   By: malaakso <malaakso@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 13:15:32 by malaakso          #+#    #+#             */
-/*   Updated: 2023/07/24 13:48:59 by malaakso         ###   ########.fr       */
+/*   Updated: 2023/07/25 11:48:38 by malaakso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,21 @@ t_bool	is_philosopher_fed(int *n_of_fed_philosophers, t_common_data *d,
 
 t_bool	is_philosopher_dead(t_philosopher *p)
 {
-	//todo
+	t_bool	ret;
+
+	ret = FALSE;
+	pthread_mutex_lock(&p->eat_timestamp_lock);
+	if (get_timestamp(p->common_data->start) - p->eat_timestamp
+		>= p->common_data->time_to_die * 1000)
+	{
+		philo_stdout(p, "died");
+		pthread_mutex_lock(&p->common_data->is_finished_lock);
+		p->common_data->is_finished = TRUE;
+		pthread_mutex_unlock(&p->common_data->is_finished_lock);
+		ret = TRUE;
+	}
+	pthread_mutex_unlock(&p->eat_timestamp_lock);
+	return (ret);
 }
 
 void	*monitor_routine(t_common_data *d)
