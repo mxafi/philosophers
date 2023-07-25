@@ -6,7 +6,7 @@
 /*   By: malaakso <malaakso@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 22:04:32 by malaakso          #+#    #+#             */
-/*   Updated: 2023/07/25 12:02:58 by malaakso         ###   ########.fr       */
+/*   Updated: 2023/07/25 12:48:23 by malaakso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@ t_err	join_threads(t_common_data *d)
 			ret = JOIN_FAIL;
 		i++;
 	}
+	//printf("Debug: join_threads: all philos joined\n");
 	if (pthread_join(d->monitor_id, NULL))
 		ret = JOIN_FAIL;
+	//printf("Debug: join_threads: monitor joined\n");
 	return (ret);
 }
 
@@ -62,10 +64,14 @@ int	main(int ac, char **av)
 		return (1);
 	if (init_memory(&data, ac, av) != SUCCESS)
 		return (1);
+	//printf("Debug: create_threads: started\n");
 	if (create_threads(data) != SUCCESS)
 		printf("Error: create_threads\n");
+	//printf("Debug: create_threads: finished\n");
+	//printf("Debug: join_threads: started\n");
 	if (join_threads(data) != SUCCESS)
 		printf("Error: join_threads\n");
+	//printf("Debug: join_threads: finished\n");
 	free_memory(data);
 	return (0);
 }
