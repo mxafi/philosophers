@@ -6,7 +6,7 @@
 /*   By: malaakso <malaakso@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 16:38:46 by malaakso          #+#    #+#             */
-/*   Updated: 2023/07/24 10:24:42 by malaakso         ###   ########.fr       */
+/*   Updated: 2023/07/25 12:24:57 by malaakso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ t_err	init_mutexes(t_common_data *data)
  */
 t_err	set_fork_ids(t_common_data *data, int philo_id)
 {
+	if (!data || philo_id < 0)
+		return (FAIL);
 	if (philo_id % 2 == 0)
 	{
 		data->philosophers[philo_id - 1]->fork_id[0] = philo_id - 1;
@@ -94,6 +96,7 @@ t_err	set_fork_ids(t_common_data *data, int philo_id)
 			data->philosophers[philo_id - 1]->fork_id[0] = 0;
 		data->philosophers[philo_id - 1]->fork_id[1] = philo_id - 1;
 	}
+	return (SUCCESS);
 }
 
 /**
@@ -130,6 +133,7 @@ t_err	init_philosophers(t_common_data *data)
 				&data->philosophers[i - 1]->eat_timestamp_lock, NULL))
 			return (MUTEX_FAIL);
 	}
+	return (SUCCESS);
 }
 
 /**
@@ -145,7 +149,7 @@ t_err	init_memory(t_common_data **data, int ac, char **av)
 {
 	*data = malloc(sizeof(t_common_data));
 	if (!*data)
-		return (NULL);
+		return (MALLOC_FAIL);
 	memset(*data, 0, sizeof(t_common_data));
 	(*data)->number_of_philosophers = my_atoi(av[1]);
 	(*data)->time_to_die = my_atoi(av[2]);

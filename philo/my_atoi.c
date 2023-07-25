@@ -6,7 +6,7 @@
 /*   By: malaakso <malaakso@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 15:57:09 by malaakso          #+#    #+#             */
-/*   Updated: 2023/07/20 17:53:36 by malaakso         ###   ########.fr       */
+/*   Updated: 2023/07/25 12:20:29 by malaakso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ static int	is_whitespace(char c)
 
 static int	clamp_overflow(size_t input, int sign)
 {
-	if (input > LONG_MAX)
+	if (input > (size_t)LONG_MAX)
 	{
 		if (sign == 1)
 			return ((int)LONG_MAX);
-		else if (input > LONG_MAX + 1)
-			return ((int)(LONG_MAX + 1));
+		else if (input > (size_t)LONG_MAX + 1)
+			return ((int)((size_t)LONG_MAX + 1));
 	}
 	return ((int)input * sign);
 }

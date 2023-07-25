@@ -6,7 +6,7 @@
 /*   By: malaakso <malaakso@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 15:45:20 by malaakso          #+#    #+#             */
-/*   Updated: 2023/07/19 18:07:37 by malaakso         ###   ########.fr       */
+/*   Updated: 2023/07/25 12:17:12 by malaakso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ static t_err	check_other_arguments(int ac, char **av)
 	int	i;
 
 	i = 2;
-	while (av[i] < ac)
+	while (i < ac)
 	{
-		if (my_atoi(av[i] < 0))
+		if (my_atoi(av[i]) < 0)
 		{
 			printf("Not all arguments are in the positive integer range!\n");
 			return (FAIL);
