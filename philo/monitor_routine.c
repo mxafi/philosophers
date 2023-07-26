@@ -6,7 +6,7 @@
 /*   By: malaakso <malaakso@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 13:15:32 by malaakso          #+#    #+#             */
-/*   Updated: 2023/07/25 12:26:26 by malaakso         ###   ########.fr       */
+/*   Updated: 2023/07/26 15:45:17 by malaakso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,17 @@ t_bool	is_philosopher_dead(t_philosopher *p)
 	if (get_timestamp(p->common_data->start) - p->eat_timestamp
 		>= (size_t)p->common_data->time_to_die * 1000)
 	{
+		pthread_mutex_unlock(&p->eat_timestamp_lock);
 		philo_stdout(p, "died");
 		pthread_mutex_lock(&p->common_data->is_finished_lock);
 		p->common_data->is_finished = TRUE;
 		pthread_mutex_unlock(&p->common_data->is_finished_lock);
 		ret = TRUE;
 	}
-	pthread_mutex_unlock(&p->eat_timestamp_lock);
+	else
+	{
+		pthread_mutex_unlock(&p->eat_timestamp_lock);
+	}
 	return (ret);
 }
 

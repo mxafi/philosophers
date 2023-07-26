@@ -6,7 +6,7 @@
 /*   By: malaakso <malaakso@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 22:05:51 by malaakso          #+#    #+#             */
-/*   Updated: 2023/07/25 12:12:09 by malaakso         ###   ########.fr       */
+/*   Updated: 2023/07/26 15:15:03 by malaakso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ typedef enum e_err
 	PRINT_FAIL,
 	EAT_FAIL,
 	JOIN_FAIL,
-	CREATE_THREAD_FAIL
+	CREATE_THREAD_FAIL,
+	INTERRUPTED_FAIL
 }	t_err;
 
 typedef enum e_bool
@@ -98,7 +99,7 @@ t_err	init_memory(t_common_data **data, int ac, char **av);
 t_bool	is_philo_finished(t_common_data *d);
 t_err	philo_stdout(t_philosopher *p, char *msg);
 void	*philo_routine(void *v_p);
-void	philo_usleep(t_common_data *d, size_t sleep_duration_microseconds);
+t_err	philo_usleep(t_common_data *d, size_t sleep_duration_microseconds);
 t_err	philo_sleep(t_philosopher *p);
 void	*monitor_routine(void *v_d);
 
