@@ -6,7 +6,7 @@
 /*   By: malaakso <malaakso@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 22:04:32 by malaakso          #+#    #+#             */
-/*   Updated: 2023/07/28 16:39:50 by malaakso         ###   ########.fr       */
+/*   Updated: 2023/07/28 17:22:43 by malaakso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,8 @@ t_err	join_threads(t_common_data *d)
 		}
 		i++;
 	}
-	// printf("Debug: All Philosophers joined!\n");
 	if (pthread_join(d->monitor_id, NULL))
 		ret = JOIN_FAIL;
-	// printf("Debug: Monitor joined!\n");
 	return (ret);
 }
 
@@ -61,7 +59,7 @@ t_err	create_threads(t_common_data *d)
 int	main(int ac, char **av)
 {
 	t_common_data	*data;
-	// DEBUG: Makefile has debug flags and extra CFLAGS to remove before submission
+
 	if (preflight_checks(ac, av) != SUCCESS)
 		return (1);
 	if (init_memory(&data, ac, av) != SUCCESS)

@@ -6,7 +6,7 @@
 /*   By: malaakso <malaakso@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 16:38:46 by malaakso          #+#    #+#             */
-/*   Updated: 2023/07/28 17:00:48 by malaakso         ###   ########.fr       */
+/*   Updated: 2023/07/28 17:22:06 by malaakso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,10 +121,7 @@ t_err	init_philosophers(t_common_data *data)
 		data->philosophers[i - 1] = malloc(sizeof(t_philosopher));
 		if (!data->philosophers[i - 1])
 			return (MALLOC_FAIL);
-		memset(data->philosophers[i - 1], 0, sizeof(t_philosopher));
-		data->philosophers[i - 1]->philo_id = i;
-		data->philosophers[i - 1]->common_data = data;
-		data->philosophers[i - 1]->eat_finished = 0;
+		init_philosophers_basic_values(data, i - 1);
 		if (set_fork_ids(data, data->philosophers[i - 1]->philo_id) != SUCCESS)
 			return (FAIL);
 		if (pthread_mutex_init(&data->philosophers[i - 1]->eat_count_lock, NULL)

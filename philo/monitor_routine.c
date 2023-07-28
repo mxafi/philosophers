@@ -6,7 +6,7 @@
 /*   By: malaakso <malaakso@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 13:15:32 by malaakso          #+#    #+#             */
-/*   Updated: 2023/07/28 16:39:13 by malaakso         ###   ########.fr       */
+/*   Updated: 2023/07/28 17:08:06 by malaakso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,7 @@ void	*monitor_routine(void *v_d)
 			i++;
 		}
 		if (n_of_fed_philosophers == d->number_of_philosophers)
-		{
-			pthread_mutex_lock(&d->is_finished_lock);
-			d->is_finished = TRUE;
-			pthread_mutex_unlock(&d->is_finished_lock);
 			return (NULL);
-		}
 	}
 	return (NULL);
 }

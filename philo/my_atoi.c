@@ -6,14 +6,14 @@
 /*   By: malaakso <malaakso@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 15:57:09 by malaakso          #+#    #+#             */
-/*   Updated: 2023/07/25 12:20:29 by malaakso         ###   ########.fr       */
+/*   Updated: 2023/07/28 17:05:02 by malaakso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 static int	is_whitespace(char c)
-{	
+{
 	if ((c > 8 && c < 14) || c == 32)
 		return (1);
 	return (0);
