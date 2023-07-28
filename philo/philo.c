@@ -6,7 +6,7 @@
 /*   By: malaakso <malaakso@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 22:04:32 by malaakso          #+#    #+#             */
-/*   Updated: 2023/07/26 15:47:43 by malaakso         ###   ########.fr       */
+/*   Updated: 2023/07/28 16:39:50 by malaakso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,10 @@ t_err	join_threads(t_common_data *d)
 		}
 		i++;
 	}
+	// printf("Debug: All Philosophers joined!\n");
 	if (pthread_join(d->monitor_id, NULL))
 		ret = JOIN_FAIL;
+	// printf("Debug: Monitor joined!\n");
 	return (ret);
 }
 

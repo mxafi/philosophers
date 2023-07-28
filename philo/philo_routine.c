@@ -6,7 +6,7 @@
 /*   By: malaakso <malaakso@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 09:53:14 by malaakso          #+#    #+#             */
-/*   Updated: 2023/07/28 14:01:12 by malaakso         ###   ########.fr       */
+/*   Updated: 2023/07/28 17:03:20 by malaakso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ void	*philo_routine(void *v_p)
 	t_philosopher	*p;
 
 	p = (t_philosopher *)v_p;
+	if (philo_stdout(p, "is thinking") != SUCCESS)
+		return (NULL);
 	if (p->philo_id % 2 == 0)
 	{
 		if (philo_sleep(p) != SUCCESS)
@@ -80,20 +82,11 @@ void	*philo_routine(void *v_p)
 	while (1)
 	{
 		if (philo_eat(p) != SUCCESS)
-		{
-			printf("Debug: Terminating philo %i eat\n", p->philo_id);
-			return (NULL);
-		}
+			break ;
 		if (philo_sleep(p) != SUCCESS)
-		{
-			printf("Debug: Terminating philo %i sleep\n", p->philo_id);
-			return (NULL);
-		}
+			break ;
 		if (philo_stdout(p, "is thinking") != SUCCESS)
-		{
-			printf("Debug: Terminating philo %i think\n", p->philo_id);
-			return (NULL);
-		}
+			break ;
 		usleep(500);
 	}
 	return (NULL);

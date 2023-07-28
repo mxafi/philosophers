@@ -6,7 +6,7 @@
 /*   By: malaakso <malaakso@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 15:45:20 by malaakso          #+#    #+#             */
-/*   Updated: 2023/07/25 12:17:12 by malaakso         ###   ########.fr       */
+/*   Updated: 2023/07/28 16:42:10 by malaakso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static t_err	check_number_of_philosophers(char *number_of_philosophers_arg)
 	philo_count = my_atoi(number_of_philosophers_arg);
 	if (philo_count > 0 && philo_count <= MAX_PHILOSOPHER_COUNT)
 		return (SUCCESS);
-	printf("Number of philosophers (%s) is not between 1 - %i",
+	printf("Number of philosophers (%s) is not between 1 - %i\n",
 		number_of_philosophers_arg, MAX_PHILOSOPHER_COUNT);
 	return (FAIL);
 }

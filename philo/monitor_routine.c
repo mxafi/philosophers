@@ -6,7 +6,7 @@
 /*   By: malaakso <malaakso@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 13:15:32 by malaakso          #+#    #+#             */
-/*   Updated: 2023/07/26 15:45:17 by malaakso         ###   ########.fr       */
+/*   Updated: 2023/07/28 16:39:13 by malaakso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_bool	is_philosopher_fed(int *n_of_fed_philosophers, t_common_data *d,
 	pthread_mutex_lock(&p->eat_finished_lock);
 	if (p->eat_finished == TRUE)
 	{
-		(void)*n_of_fed_philosophers++;
+		*n_of_fed_philosophers = *n_of_fed_philosophers + 1;
 		ret = TRUE;
 	}
 	pthread_mutex_unlock(&p->eat_finished_lock);
@@ -77,7 +77,12 @@ void	*monitor_routine(void *v_d)
 			i++;
 		}
 		if (n_of_fed_philosophers == d->number_of_philosophers)
+		{
+			pthread_mutex_lock(&d->is_finished_lock);
+			d->is_finished = TRUE;
+			pthread_mutex_unlock(&d->is_finished_lock);
 			return (NULL);
+		}
 	}
 	return (NULL);
 }

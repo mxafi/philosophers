@@ -6,7 +6,7 @@
 /*   By: malaakso <malaakso@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 16:38:46 by malaakso          #+#    #+#             */
-/*   Updated: 2023/07/25 12:24:57 by malaakso         ###   ########.fr       */
+/*   Updated: 2023/07/28 17:00:48 by malaakso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	free_memory(t_common_data *d)
 	if (d->forks)
 		free(d->forks);
 	pthread_mutex_destroy(&d->stdout_lock);
+	pthread_mutex_destroy(&d->is_finished_lock);
 	free(d);
 }
 
