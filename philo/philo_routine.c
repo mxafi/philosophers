@@ -6,7 +6,7 @@
 /*   By: malaakso <malaakso@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 09:53:14 by malaakso          #+#    #+#             */
-/*   Updated: 2023/07/26 18:07:03 by malaakso         ###   ########.fr       */
+/*   Updated: 2023/07/28 14:01:12 by malaakso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,17 @@
 t_err	philo_eat_take_forks(t_philosopher *p)
 {
 	pthread_mutex_lock(&p->common_data->forks[p->fork_id[0]]);
-	// printf("%-8zu %-4i fork %i picked up\n", us_to_ms(get_timestamp(p->common_data->start)), p->philo_id, p->fork_id[0]);
 	if (philo_stdout(p, "has taken a fork") != SUCCESS
 		|| p->fork_id[0] == p->fork_id[1])
 	{
 		pthread_mutex_unlock(&p->common_data->forks[p->fork_id[0]]);
-		// printf("%-8zu %-4i fork %i dropped\n", us_to_ms(get_timestamp(p->common_data->start)), p->philo_id, p->fork_id[0]);
 		return (EAT_FAIL);
 	}
 	pthread_mutex_lock(&p->common_data->forks[p->fork_id[1]]);
-	// printf("%-8zu %-4i fork %i picked up\n", us_to_ms(get_timestamp(p->common_data->start)), p->philo_id, p->fork_id[1]);
 	if (philo_stdout(p, "has taken a fork") != SUCCESS)
 	{
 		pthread_mutex_unlock(&p->common_data->forks[p->fork_id[0]]);
-		// printf("%-8zu %-4i fork %i dropped\n", us_to_ms(get_timestamp(p->common_data->start)), p->philo_id, p->fork_id[0]);
 		pthread_mutex_unlock(&p->common_data->forks[p->fork_id[1]]);
-		// printf("%-8zu %-4i fork %i dropped\n", us_to_ms(get_timestamp(p->common_data->start)), p->philo_id, p->fork_id[1]);
 		return (EAT_FAIL);
 	}
 	return (SUCCESS);
@@ -68,9 +63,7 @@ t_err	philo_eat(t_philosopher *p)
 			p->common_data->time_to_eat * 1000) != SUCCESS)
 		ret = EAT_FAIL;
 	pthread_mutex_unlock(&p->common_data->forks[p->fork_id[0]]);
-	printf("%-8zu %-4i fork %i dropped\n", us_to_ms(get_timestamp(p->common_data->start)), p->philo_id, p->fork_id[0]);
 	pthread_mutex_unlock(&p->common_data->forks[p->fork_id[1]]);
-	printf("%-8zu %-4i fork %i dropped\n", us_to_ms(get_timestamp(p->common_data->start)), p->philo_id, p->fork_id[1]);
 	return (ret);
 }
 
@@ -88,18 +81,20 @@ void	*philo_routine(void *v_p)
 	{
 		if (philo_eat(p) != SUCCESS)
 		{
+			printf("Debug: Terminating philo %i eat\n", p->philo_id);
 			return (NULL);
 		}
 		if (philo_sleep(p) != SUCCESS)
 		{
+			printf("Debug: Terminating philo %i sleep\n", p->philo_id);
 			return (NULL);
 		}
 		if (philo_stdout(p, "is thinking") != SUCCESS)
 		{
+			printf("Debug: Terminating philo %i think\n", p->philo_id);
 			return (NULL);
 		}
-		// usleep(100);
-		// sleep for 500us here ???
+		usleep(500);
 	}
 	return (NULL);
 }
