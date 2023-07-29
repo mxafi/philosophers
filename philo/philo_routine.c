@@ -6,7 +6,7 @@
 /*   By: malaakso <malaakso@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 09:53:14 by malaakso          #+#    #+#             */
-/*   Updated: 2023/07/28 17:32:07 by malaakso         ###   ########.fr       */
+/*   Updated: 2023/07/29 12:06:53 by malaakso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,14 @@ void	*philo_routine(void *v_p)
 	t_philosopher	*p;
 
 	p = (t_philosopher *)v_p;
-	if (p->philo_id % 2 == 0)
-	{
-		if (philo_sleep(p) != SUCCESS)
-			return (NULL);
-	}
 	if (philo_stdout(p, "is thinking") != SUCCESS)
 		return (NULL);
+	if (p->philo_id % 2 == 0)
+	{
+		if (philo_usleep(p->common_data,
+				p->common_data->time_to_sleep * 1000) != SUCCESS)
+			return (NULL);
+	}
 	while (1)
 	{
 		if (philo_eat(p) != SUCCESS)
@@ -87,7 +88,6 @@ void	*philo_routine(void *v_p)
 			break ;
 		if (philo_stdout(p, "is thinking") != SUCCESS)
 			break ;
-		usleep(500);
 	}
 	return (NULL);
 }

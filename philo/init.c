@@ -6,7 +6,7 @@
 /*   By: malaakso <malaakso@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 16:38:46 by malaakso          #+#    #+#             */
-/*   Updated: 2023/07/29 12:04:59 by malaakso         ###   ########.fr       */
+/*   Updated: 2023/07/29 12:07:13 by malaakso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,20 +83,6 @@ t_err	set_fork_ids(t_common_data *data, int philo_id)
 {
 	if (!data || philo_id < 0)
 		return (FAIL);
-	// if (philo_id % 2 == 0)
-	// {
-	// 	data->philosophers[philo_id - 1]->fork_id[0] = philo_id - 1;
-	// 	data->philosophers[philo_id - 1]->fork_id[1] = philo_id;
-	// 	if (philo_id == data->number_of_philosophers)
-	// 		data->philosophers[philo_id - 1]->fork_id[1] = 0;
-	// }
-	// else
-	// {
-	// 	data->philosophers[philo_id - 1]->fork_id[0] = philo_id;
-	// 	if (philo_id == data->number_of_philosophers)
-	// 		data->philosophers[philo_id - 1]->fork_id[0] = 0;
-	// 	data->philosophers[philo_id - 1]->fork_id[1] = philo_id - 1;
-	// }
 	data->philosophers[philo_id - 1]->fork_id[0] = philo_id - 1;
 	data->philosophers[philo_id - 1]->fork_id[1] = philo_id;
 	if (philo_id == data->number_of_philosophers)
