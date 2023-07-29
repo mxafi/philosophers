@@ -6,7 +6,7 @@
 /*   By: malaakso <malaakso@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 16:38:46 by malaakso          #+#    #+#             */
-/*   Updated: 2023/07/28 17:22:06 by malaakso         ###   ########.fr       */
+/*   Updated: 2023/07/29 12:04:59 by malaakso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,20 @@ void	free_memory(t_common_data *d)
 	i = 0;
 	while (i < d->number_of_philosophers)
 	{
-		if (d->philosophers[i])
-			free(d->philosophers[i]);
 		pthread_mutex_destroy(&d->forks[i]);
 		pthread_mutex_destroy(&d->philosophers[i]->eat_count_lock);
 		pthread_mutex_destroy(&d->philosophers[i]->eat_finished_lock);
 		pthread_mutex_destroy(&d->philosophers[i]->eat_timestamp_lock);
+		if (d->philosophers[i])
+			free(d->philosophers[i]);
 		i++;
 	}
+	pthread_mutex_destroy(&d->stdout_lock);
+	pthread_mutex_destroy(&d->is_finished_lock);
 	if (d->philosophers)
 		free(d->philosophers);
 	if (d->forks)
 		free(d->forks);
-	pthread_mutex_destroy(&d->stdout_lock);
-	pthread_mutex_destroy(&d->is_finished_lock);
 	free(d);
 }
 
@@ -83,20 +83,24 @@ t_err	set_fork_ids(t_common_data *data, int philo_id)
 {
 	if (!data || philo_id < 0)
 		return (FAIL);
-	if (philo_id % 2 == 0)
-	{
-		data->philosophers[philo_id - 1]->fork_id[0] = philo_id - 1;
-		data->philosophers[philo_id - 1]->fork_id[1] = philo_id;
-		if (philo_id == data->number_of_philosophers)
-			data->philosophers[philo_id - 1]->fork_id[1] = 0;
-	}
-	else
-	{
-		data->philosophers[philo_id - 1]->fork_id[0] = philo_id;
-		if (philo_id == data->number_of_philosophers)
-			data->philosophers[philo_id - 1]->fork_id[0] = 0;
-		data->philosophers[philo_id - 1]->fork_id[1] = philo_id - 1;
-	}
+	// if (philo_id % 2 == 0)
+	// {
+	// 	data->philosophers[philo_id - 1]->fork_id[0] = philo_id - 1;
+	// 	data->philosophers[philo_id - 1]->fork_id[1] = philo_id;
+	// 	if (philo_id == data->number_of_philosophers)
+	// 		data->philosophers[philo_id - 1]->fork_id[1] = 0;
+	// }
+	// else
+	// {
+	// 	data->philosophers[philo_id - 1]->fork_id[0] = philo_id;
+	// 	if (philo_id == data->number_of_philosophers)
+	// 		data->philosophers[philo_id - 1]->fork_id[0] = 0;
+	// 	data->philosophers[philo_id - 1]->fork_id[1] = philo_id - 1;
+	// }
+	data->philosophers[philo_id - 1]->fork_id[0] = philo_id - 1;
+	data->philosophers[philo_id - 1]->fork_id[1] = philo_id;
+	if (philo_id == data->number_of_philosophers)
+		data->philosophers[philo_id - 1]->fork_id[1] = 0;
 	return (SUCCESS);
 }
 
